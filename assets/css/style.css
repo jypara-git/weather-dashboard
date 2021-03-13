@@ -1,0 +1,21 @@
+:root {
+    --primary: 	#1a2430;
+    --secondary: 	#5f9ea0;
+}
+* {
+  box-sizing:border-box;
+}
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif ;
+    font-size: 20px;
+}
+.hero {
+    padding: 0;
+    background-color: var(--primary);
+    color: white;
+    text-align: center;
+    height: 80px;
+}
+.hero h1 {
+    padding-top: 10px;
+}
