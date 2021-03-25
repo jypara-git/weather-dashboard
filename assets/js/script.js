@@ -6,11 +6,15 @@ var convertTemp = function(kelvin) {
     return formula;
 };
 var search = async function(event) {
-    var cityInput = $("#city").val().trim();
-    // adding cityInput to and array
-    cities.push(cityInput);
-    // save to localStorage
-    localStorage.setItem("city", JSON.stringify(cities));
+    console.log(event);
+    var cityId = event.currentTarget.id;
+    var button = $("#" + cityId).text();
+    var cityInput;
+    if (button === "") {
+        cityInput = $("#city").val().trim();
+    } else {
+        cityInput = button;
+    }
     $("#current-city").html(cityInput);
     $("#current-city").append(currentDate);
 
@@ -38,6 +42,13 @@ var search = async function(event) {
         var data = await response.json();
         var uvi = data.daily[0].uvi;
         $("#uv-index").html(uvi);
+        if (uvi < 3) {
+            $("#uv-index").addClass("bg-success");
+        } else if (uvi > 3 && uvi < 7) {
+            $("#uv-index").addClass("bg-warning");
+        } else if (uvi > 7) {
+            $("#uv-index").addClass("bg-danger");
+        }
         for (var i = 1; i < 6; i++) {
             var dateString = moment.unix(data.daily[i].dt).format("M/DD/YYYY");
             var icons = data.daily[i].weather[0].icon;
@@ -47,6 +58,10 @@ var search = async function(event) {
             $("#future-temp" + (i-1)).html(data.daily[i].temp.day + "°F");
             $("#future-humid" + (i-1)).html(data.daily[i].humidity + "%");
         }
+        // adding cityInput to and array
+        cities.push(cityInput);
+        // save to localStorage
+        localStorage.setItem("city", JSON.stringify(cities));
     } else {
         alert("Error:" + response.statusText);
     }
@@ -58,7 +73,17 @@ if (citySaved !== null) {
 }
 console.log(cities);
 
-
+for (var i = 0; i < cities.length; i++) {
+    var city = cities[i];
+    var listEl = document.createElement("li");
+    var button = document.createElement("button");
+    button.className = "btn btn-li btn-outline-secondary";
+    button.id = "list-button" + i;
+    button.innerHTML = city;
+    listEl.appendChild(button);
+    document.getElementById("city-list").appendChild(listEl);
+    $("#list-button" + i).on("click", search);
+}
 
 $("#search-button").on("click", search);
 

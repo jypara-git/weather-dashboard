@@ -28,3 +28,8 @@ body {
 .forecast {
     width: 300px !important;
 }
+.btn-li {
+    width: 250px;
+    height: 50px;
+}
+
