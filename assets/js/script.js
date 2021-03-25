@@ -17,9 +17,9 @@ var search = async function(event) {
         var tempVal = data.main.temp;
         var tempF = convertTemp(tempVal);
         var weatherIcon = data.weather[0].icon;
-        var iconUrl = "http://openweathermap.org/img/w" + weatherIcon + ".png";
+        var iconUrl = "http://openweathermap.org/img/wn/" + weatherIcon + "@2x.png";
+        $("#current-city").append("<img src=" + iconUrl + ">")
         $("#temperature").html(tempF + "°F");
-        $("#current-city").attr('scr', iconUrl);
         var humidity = data.main.humidity;
         $("#humidity").html(humidity + "%");
         var windSpeed = data.wind.speed;
@@ -38,6 +38,9 @@ var search = async function(event) {
         $("#uv-index").html(uvi);
         for (var i = 1; i < 6; i++) {
             var dateString = moment.unix(data.daily[i].dt).format("M/DD/YYYY");
+            var icons = data.daily[i].weather[0].icon;
+            var iconurl = "http://openweathermap.org/img/wn/" + icons + "@2x.png";
+            $("#future-img" + (i-1)).html("<img src=" +iconurl+ ">");
             $("#future-date" + (i-1)).html(dateString);
             $("#future-temp" + (i-1)).html(data.daily[i].temp.day + "°F");
             $("#future-humid" + (i-1)).html(data.daily[i].humidity + "%");
