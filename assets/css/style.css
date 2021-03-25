@@ -19,3 +19,6 @@ body {
 .hero h1 {
     padding-top: 10px;
 }
+.forecast {
+    width: auto;
+}
