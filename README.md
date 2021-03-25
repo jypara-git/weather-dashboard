@@ -1,6 +1,6 @@
 # Weather-dashboard
 ## Purpose
-A web application which allows to search for any city's weather and weather forecast for 5 days
+A web application which allows to see the weather outlook for multiple cities
 ## Built with
 - HTML
 - CSS
