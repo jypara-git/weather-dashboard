@@ -7,7 +7,7 @@
 }
 body {
     font-family: Georgia, 'Times New Roman', Times, serif ;
-    font-size: 20px;
+    font-size: 17px;
 }
 .hero {
     padding: 0;
@@ -19,6 +19,12 @@ body {
 .hero h1 {
     padding-top: 10px;
 }
-.forecast {
+.forecast-container {
     width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.forecast {
+    width: 300px !important;
 }
